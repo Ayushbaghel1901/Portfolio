@@ -10,6 +10,7 @@ import Projects from "@/components/site/Projects";
 import Education from "@/components/site/Education";
 import Contact from "@/components/site/Contact";
 import Footer from "@/components/site/Footer";
+import Admin from "@/pages/Admin";
 
 function Portfolio() {
   return (
@@ -25,17 +26,6 @@ function Portfolio() {
         <Contact />
       </main>
       <Footer />
-      <Toaster
-        position="bottom-right"
-        theme="dark"
-        toastOptions={{
-          style: {
-            background: "#0e0e0e",
-            border: "1px solid rgba(255,255,255,0.08)",
-            color: "#fff",
-          },
-        }}
-      />
     </div>
   );
 }
@@ -46,7 +36,19 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Portfolio />} />
+          <Route path="/admin" element={<Admin />} />
         </Routes>
+        <Toaster
+          position="bottom-right"
+          theme="dark"
+          toastOptions={{
+            style: {
+              background: "#0e0e0e",
+              border: "1px solid rgba(255,255,255,0.08)",
+              color: "#fff",
+            },
+          }}
+        />
       </BrowserRouter>
     </div>
   );

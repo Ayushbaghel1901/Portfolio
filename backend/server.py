@@ -68,6 +68,7 @@ class ContactRecord(BaseModel):
     subject: str
     message: str
     email_sent: bool = False
+    read: bool = False
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
 
@@ -169,7 +170,33 @@ async def submit_contact(payload: ContactCreate):
 @api_router.get("/contacts", dependencies=[Depends(require_admin)])
 async def list_contacts():
     items = await db.contacts.find({}, {"_id": 0}).sort("created_at", -1).to_list(500)
-    return {"items": items, "count": len(items)}
+    unread = sum(1 for i in items if not i.get("read", False))
+    return {"items": items, "count": len(items), "unread": unread}
+
+
+@api_router.patch("/contacts/{contact_id}/read", dependencies=[Depends(require_admin)])
+async def mark_contact_read(contact_id: str, read: bool = True):
+    result = await db.contacts.update_one({"id": contact_id}, {"$set": {"read": read}})
+    if result.matched_count == 0:
+        raise HTTPException(status_code=404, detail="Message not found")
+    return {"success": True, "id": contact_id, "read": read}
+
+
+@api_router.delete("/contacts/{contact_id}", dependencies=[Depends(require_admin)])
+async def delete_contact(contact_id: str):
+    result = await db.contacts.delete_one({"id": contact_id})
+    if result.deleted_count == 0:
+        raise HTTPException(status_code=404, detail="Message not found")
+    return {"success": True, "id": contact_id}
+
+
+@api_router.post("/admin/verify")
+async def verify_admin(x_admin_token: Optional[str] = Header(default=None)):
+    if not ADMIN_TOKEN:
+        raise HTTPException(status_code=500, detail="Admin token not configured on server")
+    if not x_admin_token or x_admin_token != ADMIN_TOKEN:
+        raise HTTPException(status_code=401, detail="Invalid admin token")
+    return {"success": True, "authorized": True}
 
 
 @api_router.get("/resume")
