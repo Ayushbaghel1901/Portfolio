@@ -1,0 +1,113 @@
+{
+  "theme_and_archetype": {
+    "theme": "Dark",
+    "archetype": "4 - Swiss & High-Contrast (Tech Dark Variant)",
+    "reasoning": "Fits the dark, modern, techy requirements for an ambitious AI/ML student portfolio. Deep dark tones provide a professional cinematic look, while high-contrast cyan accents highlight AI proficiency without relying on cliché AI-slop purple/violet."
+  },
+  "typography": {
+    "fonts": {
+      "heading": "Outfit",
+      "body": "Plus Jakarta Sans",
+      "mono_accents": "JetBrains Mono"
+    },
+    "hierarchy": {
+      "h1": "text-4xl sm:text-5xl lg:text-6xl tracking-tighter font-black text-white",
+      "h2": "text-2xl sm:text-3xl lg:text-4xl tracking-tight font-bold text-white",
+      "h3": "text-xl sm:text-2xl font-semibold text-zinc-100",
+      "body": "text-base leading-relaxed text-zinc-400",
+      "labels": "text-xs tracking-[0.2em] uppercase font-mono text-cyan-400"
+    }
+  },
+  "colors": {
+    "background": {
+      "primary": "bg-[#0a0a0a]",
+      "secondary": "bg-[#121212]",
+      "surface": "bg-zinc-900/50",
+      "glass": "bg-[#0a0a0a]/70 backdrop-blur-xl border border-white/10"
+    },
+    "text": {
+      "primary": "text-white",
+      "secondary": "text-zinc-400",
+      "accent": "text-cyan-400",
+      "accent_hover": "hover:text-cyan-300"
+    },
+    "border": {
+      "default": "border-white/10",
+      "hover": "border-white/20",
+      "accent": "border-cyan-500/50"
+    },
+    "accent_gradients": {
+      "ai_glow": "bg-gradient-to-br from-cyan-500/20 via-blue-500/10 to-transparent blur-3xl"
+    }
+  },
+  "layout_and_spacing": {
+    "grid_strategy": "MODE A: The 'Tetris' Grid. Use asymmetrical layouts. Do not center everything. Let elements breathe with negative space.",
+    "spacing_scale": "Generous spacing: py-24 or py-32 for major sections. gap-8 to gap-12 for grids.",
+    "alignment": "Optically align left. Only center hero text if balanced by a strong off-center visual."
+  },
+  "components_strategy": {
+    "buttons": {
+      "primary": "bg-cyan-500 text-black font-semibold hover:bg-cyan-400 transition-colors px-6 py-3 rounded-sm border border-transparent shadow-[0_0_15px_rgba(0,229,255,0.3)] hover:shadow-[0_0_25px_rgba(0,229,255,0.5)]",
+      "secondary": "bg-transparent text-white border border-white/20 hover:border-white/40 hover:bg-white/5 px-6 py-3 rounded-sm transition-colors"
+    },
+    "cards": {
+      "project_card": "group relative overflow-hidden bg-zinc-900/30 border border-white/10 hover:border-cyan-500/50 transition-all duration-300 rounded-lg",
+      "tech_card": "flex items-center gap-3 p-4 bg-[#121212] border border-white/5 hover:border-white/20 transition-all rounded-md"
+    },
+    "navigation": "Sticky glassmorphism header (z-50, backdrop-blur-xl bg-[#0a0a0a]/80 border-b border-white/5). Links must be visible on desktop."
+  },
+  "motion_and_interactions": {
+    "hover_states": "Cards lift slightly (-translate-y-1). Subtle glow on hover for tech stack items.",
+    "scroll_animations": "Staggered fade-up for grids using framer-motion.",
+    "hero_photo": "Do NOT use a plain circle. Use a geometric mask (sharp rectangular cut, angled clip-path) combined with a retro-futuristic grid border or a glowing cyan offset stroke to fit the dark techy vibe."
+  },
+  "media_and_assets": {
+    "ayush_photo": {
+      "url": "https://customer-assets.emergentagent.com/job_e476834d-6d78-47d9-b0e1-86b131a69550/artifacts/wrcwv469_Gemini_Generated_Image_minkvpminkvpmink%20%281%29.png",
+      "description": "Hero section professional photo."
+    },
+    "projects": [
+      {
+        "id": "amazon_sales",
+        "title": "Amazon Sales Data Analysis",
+        "url": "https://images.unsplash.com/photo-1557264337-e8a93017fe92?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA3MDR8MHwxfHNlYXJjaHwxfHxhYnN0cmFjdCUyMGRhdGElMjB2aXN1YWxpemF0aW9uJTIwZGFya3xlbnwwfHx8fDE3ODEyMDU5NjN8MA&ixlib=rb-4.1.0&q=85",
+        "description": "Abstract data visualization for sales analysis"
+      },
+      {
+        "id": "exam_system",
+        "title": "Online Secure Examination System",
+        "url": "https://images.unsplash.com/photo-1614064641938-3bbee52942c7?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA2MTJ8MHwxfHNlYXJjaHwxfHxkaWdpdGFsJTIwc2VjdXJpdHklMjBsb2NrJTIwZGFya3xlbnwwfHx8fDE3ODEyMDU5NjN8MA&ixlib=rb-4.1.0&q=85",
+        "description": "Security lock for exam system"
+      },
+      {
+        "id": "plagiarism",
+        "title": "Code Plagiarism Detection System",
+        "url": "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzMzJ8MHwxfHNlYXJjaHwxfHxjb2RpbmclMjBzY3JlZW4lMjBkYXJrJTIwbWF0cml4fGVufDB8fHx8MTc4MTIwNTk2M3ww&ixlib=rb-4.1.0&q=85",
+        "description": "Code matrix screen for plagiarism detection"
+      },
+      {
+        "id": "car_price",
+        "title": "Car Price Prediction ML",
+        "url": "https://images.unsplash.com/photo-1650003678540-e0576a7702ba?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzMzN8MHwxfHNlYXJjaHwxfHxmdXR1cmlzdGljJTIwY2FyJTIwZGFyayUyMHRlY2h8ZW58MHx8fHwxNzgxMjA1OTYzfDA&ixlib=rb-4.1.0&q=85",
+        "description": "Futuristic car for ML prediction"
+      }
+    ]
+  },
+  "iconography_and_libraries": {
+    "libraries": [
+      "lucide-react",
+      "react-icons",
+      "framer-motion"
+    ],
+    "instructions": "Install and use 'react-icons/si' for Tech Stack logos (e.g., SiPython, SiCplusplus, SiJavascript, SiHtml5, SiCss3, SiMongodb, SiPostgresql, SiGithub, SiLinkedin). Use 'lucide-react' for structural UI icons."
+  },
+  "specific_instructions_for_agent": [
+    "Ensure dark mode by explicitly forcing dark backgrounds (bg-[#0a0a0a]) and white text base classes.",
+    "Tech Stack Display: Make AI Tools (Gemini, GPT, Claude, Lovable, Cursor, Antigravity) visually DISTINCT from regular tech stack. Use a 'Tracing Beam' or glowing borders for the AI section to showcase proficiency.",
+    "Include 'data-testid' on ALL buttons, navigation links, and form elements to support testing.",
+    "Contact Form: Build a working UI with standard HTML action structure. Since real email backend may not exist, standardizing it with Formspree (action='https://formspree.io/f/placeholder') or simulating the send with a Toast notification is accepted.",
+    "Resume Button: It must literally use an <a> tag with 'download' attribute or visually mimic the download action clearly.",
+    "Do NOT use 'Inter' for headings. Only use it or standard sans for body if needed. Emphasize Outfit and JetBrains Mono.",
+    "Keep styling in standard React JS components with Tailwind."
+  ]
+}
