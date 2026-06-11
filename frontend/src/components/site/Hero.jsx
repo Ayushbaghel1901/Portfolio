@@ -46,7 +46,7 @@ export default function Hero() {
           >
             Ayush <br className="hidden sm:block" />
             <span className="bg-gradient-to-r from-white via-cyan-200 to-cyan-400 bg-clip-text text-transparent">
-              Baghel.
+              Baghel
             </span>
           </motion.h1>
 
@@ -164,7 +164,7 @@ export default function Hero() {
             <div className="absolute -inset-3 sm:-inset-4 border border-white/10 -translate-x-3 -translate-y-3 rounded-sm pointer-events-none" />
 
             <div
-              className="relative w-[260px] sm:w-[320px] lg:w-[380px] aspect-square overflow-hidden rounded-sm glow-cyan"
+              className="relative w-[260px] sm:w-[320px] lg:w-[380px] aspect-[4/5] overflow-hidden rounded-sm glow-cyan"
               style={{
                 clipPath:
                   "polygon(0 0, calc(100% - 24px) 0, 100% 24px, 100% 100%, 24px 100%, 0 calc(100% - 24px))",
@@ -173,7 +173,7 @@ export default function Hero() {
               <img
                 src={PROFILE.photo}
                 alt={PROFILE.name}
-                className="w-full h-full object-cover grayscale-[15%] contrast-105"
+                className="w-full h-full object-cover object-top contrast-105"
                 data-testid="hero-photo"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a]/40 via-transparent to-transparent" />

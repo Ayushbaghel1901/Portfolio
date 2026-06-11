@@ -45,7 +45,7 @@ export default function Navbar() {
           data-testid="nav-logo"
         >
           <span className="font-display text-xl font-black tracking-tight text-white">
-            {PROFILE.firstName}
+            Ayush Baghel
             <span className="text-cyan-400">.</span>
           </span>
           <span className="hidden sm:inline-block font-mono text-[10px] tracking-[0.3em] uppercase text-zinc-500 group-hover:text-cyan-400 transition">

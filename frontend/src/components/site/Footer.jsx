@@ -7,7 +7,7 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-6 sm:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
         <div className="flex items-center gap-3">
           <span className="font-display text-lg font-black tracking-tight text-white">
-            {PROFILE.firstName}
+            Ayush Baghel
             <span className="text-cyan-400">.</span>
           </span>
           <span className="font-mono text-[10px] tracking-[0.25em] uppercase text-zinc-500">

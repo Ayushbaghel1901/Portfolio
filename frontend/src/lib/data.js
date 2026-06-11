@@ -163,6 +163,32 @@ export const EDUCATION = [
       "Operating Systems",
     ],
   },
+  {
+    institution: "St. Francis Assisi School",
+    degree: "Senior Secondary (Class XII) — CBSE",
+    period: "2022 — 2024",
+    location: "Seoni, Madhya Pradesh",
+    coursework: [
+      "Physics",
+      "Chemistry",
+      "Mathematics",
+      "Computer Science",
+      "English",
+    ],
+  },
+  {
+    institution: "St. Francis Assisi School",
+    degree: "Secondary (Class X) — CBSE",
+    period: "2021 — 2022",
+    location: "Seoni, Madhya Pradesh",
+    coursework: [
+      "Mathematics",
+      "Science",
+      "Social Science",
+      "English",
+      "Hindi",
+    ],
+  },
 ];
 
 export const AI_PROVIDER_ICONS = {
