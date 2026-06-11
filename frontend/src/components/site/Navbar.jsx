@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Download } from "lucide-react";
+import { Menu, X, Eye } from "lucide-react";
 import { NAV_LINKS, PROFILE } from "@/lib/data";
+import { useResumeModal } from "@/lib/ResumeModalContext";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const RESUME_URL = `${BACKEND_URL}/api/resume`;
@@ -10,6 +11,7 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [active, setActive] = useState("home");
+  const { openModal } = useResumeModal();
 
   useEffect(() => {
     const onScroll = () => {
@@ -77,16 +79,14 @@ export default function Navbar() {
         </nav>
 
         <div className="flex items-center gap-3">
-          <a
-            href={RESUME_URL}
-            target="_blank"
-            rel="noreferrer"
-            download
+          <button
+            type="button"
+            onClick={openModal}
             className="hidden sm:inline-flex items-center gap-2 bg-cyan-500 hover:bg-cyan-400 text-black font-semibold text-sm px-4 py-2 rounded-sm transition-colors shadow-[0_0_15px_rgba(34,211,238,0.35)] hover:shadow-[0_0_25px_rgba(34,211,238,0.55)]"
             data-testid="nav-resume-button"
           >
-            <Download className="w-4 h-4" /> Resume
-          </a>
+            <Eye className="w-4 h-4" /> Resume
+          </button>
           <button
             type="button"
             onClick={() => setOpen((o) => !o)}
@@ -119,16 +119,17 @@ export default function Navbar() {
                   {link.label}
                 </a>
               ))}
-              <a
-                href={RESUME_URL}
-                target="_blank"
-                rel="noreferrer"
-                download
+              <button
+                type="button"
+                onClick={() => {
+                  setOpen(false);
+                  openModal();
+                }}
                 className="mt-2 inline-flex items-center justify-center gap-2 bg-cyan-500 text-black font-semibold text-sm px-4 py-2 rounded-sm"
                 data-testid="nav-mobile-resume-button"
               >
-                <Download className="w-4 h-4" /> Download Resume
-              </a>
+                <Eye className="w-4 h-4" /> View Resume
+              </button>
             </div>
           </motion.div>
         )}

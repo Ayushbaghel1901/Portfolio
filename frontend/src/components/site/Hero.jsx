@@ -1,7 +1,8 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
-import { ArrowDownRight, Download, Github, Linkedin, Mail, MapPin } from "lucide-react";
+import { ArrowDownRight, Download, Eye, Github, Linkedin, Mail, MapPin } from "lucide-react";
 import { PROFILE } from "@/lib/data";
+import { useResumeModal } from "@/lib/ResumeModalContext";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const RESUME_URL = `${BACKEND_URL}/api/resume`;
@@ -13,6 +14,7 @@ const stat = {
 
 export default function Hero() {
   const ref = useRef(null);
+  const { openModal } = useResumeModal();
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end start"],
@@ -79,19 +81,27 @@ export default function Hero() {
             transition={{ delay: 0.3, duration: 0.7 }}
             className="mt-8 flex flex-wrap items-center gap-4"
           >
+            <button
+              type="button"
+              onClick={openModal}
+              className="inline-flex items-center gap-2 bg-cyan-500 hover:bg-cyan-400 text-black font-semibold px-6 py-3 rounded-sm transition-colors shadow-[0_0_25px_rgba(34,211,238,0.4)] hover:shadow-[0_0_45px_rgba(34,211,238,0.6)]"
+              data-testid="hero-view-resume-button"
+            >
+              <Eye className="w-4 h-4" /> View Resume
+            </button>
             <a
               href={RESUME_URL}
               target="_blank"
               rel="noreferrer"
               download
-              className="inline-flex items-center gap-2 bg-cyan-500 hover:bg-cyan-400 text-black font-semibold px-6 py-3 rounded-sm transition-colors shadow-[0_0_25px_rgba(34,211,238,0.4)] hover:shadow-[0_0_45px_rgba(34,211,238,0.6)]"
+              className="inline-flex items-center gap-2 border border-white/15 hover:border-cyan-400/50 hover:bg-cyan-500/5 text-white font-semibold px-6 py-3 rounded-sm transition-colors"
               data-testid="hero-resume-button"
             >
-              <Download className="w-4 h-4" /> Download Resume
+              <Download className="w-4 h-4" /> Download
             </a>
             <a
               href="#contact"
-              className="inline-flex items-center gap-2 border border-white/15 hover:border-white/30 hover:bg-white/5 text-white font-semibold px-6 py-3 rounded-sm transition-colors"
+              className="inline-flex items-center gap-2 text-zinc-300 hover:text-white font-medium px-2 py-3 transition-colors"
               data-testid="hero-contact-button"
             >
               Get in touch <ArrowDownRight className="w-4 h-4" />

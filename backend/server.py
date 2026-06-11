@@ -210,6 +210,17 @@ async def download_resume():
     )
 
 
+@api_router.get("/resume/view")
+async def view_resume():
+    if not RESUME_PATH.exists():
+        raise HTTPException(status_code=404, detail="Resume not available")
+    return FileResponse(
+        path=str(RESUME_PATH),
+        media_type="application/pdf",
+        headers={"Content-Disposition": 'inline; filename="Ayush_Baghel_Resume.pdf"'},
+    )
+
+
 @api_router.post("/admin/resume", dependencies=[Depends(require_admin)])
 async def upload_resume(file: UploadFile = File(...)):
     if file.content_type not in ("application/pdf", "application/octet-stream"):
