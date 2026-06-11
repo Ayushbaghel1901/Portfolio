@@ -1,5 +1,5 @@
 from fastapi import FastAPI, APIRouter, HTTPException, UploadFile, File, Header, Depends
-from fastapi.responses import FileResponse
+from fastapi.responses import Response
 from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
@@ -32,10 +32,10 @@ ADMIN_TOKEN = os.environ.get('ADMIN_TOKEN', '')
 if RESEND_API_KEY:
     resend.api_key = RESEND_API_KEY
 
-# Resume file path
-DATA_DIR = ROOT_DIR / 'data'
-DATA_DIR.mkdir(exist_ok=True)
-RESUME_PATH = DATA_DIR / 'resume.pdf'
+# Resume storage
+RESUME_DOC_ID = "current"
+RESUME_FILENAME = "Ayush_Baghel_Resume.pdf"
+SEED_RESUME_PATH = ROOT_DIR / 'data' / 'resume.pdf'
 
 # Create the main app without a prefix
 app = FastAPI(title="Ayush Baghel - Portfolio API")
@@ -137,10 +137,12 @@ async def root():
 
 @api_router.get("/health")
 async def health():
+    resume_doc = await db.resume_files.find_one({"_id": RESUME_DOC_ID}, {"size_bytes": 1})
     return {
         "status": "ok",
         "email_configured": bool(RESEND_API_KEY),
-        "resume_available": RESUME_PATH.exists(),
+        "resume_available": resume_doc is not None,
+        "resume_size_bytes": resume_doc.get("size_bytes") if resume_doc else 0,
     }
 
 
@@ -201,23 +203,25 @@ async def verify_admin(x_admin_token: Optional[str] = Header(default=None)):
 
 @api_router.get("/resume")
 async def download_resume():
-    if not RESUME_PATH.exists():
+    doc = await db.resume_files.find_one({"_id": RESUME_DOC_ID})
+    if not doc or not doc.get("data"):
         raise HTTPException(status_code=404, detail="Resume not available")
-    return FileResponse(
-        path=str(RESUME_PATH),
+    return Response(
+        content=doc["data"],
         media_type="application/pdf",
-        filename="Ayush_Baghel_Resume.pdf",
+        headers={"Content-Disposition": f'attachment; filename="{RESUME_FILENAME}"'},
     )
 
 
 @api_router.get("/resume/view")
 async def view_resume():
-    if not RESUME_PATH.exists():
+    doc = await db.resume_files.find_one({"_id": RESUME_DOC_ID})
+    if not doc or not doc.get("data"):
         raise HTTPException(status_code=404, detail="Resume not available")
-    return FileResponse(
-        path=str(RESUME_PATH),
+    return Response(
+        content=doc["data"],
         media_type="application/pdf",
-        headers={"Content-Disposition": 'inline; filename="Ayush_Baghel_Resume.pdf"'},
+        headers={"Content-Disposition": f'inline; filename="{RESUME_FILENAME}"'},
     )
 
 
@@ -228,9 +232,19 @@ async def upload_resume(file: UploadFile = File(...)):
     content = await file.read()
     if len(content) > 10 * 1024 * 1024:
         raise HTTPException(status_code=400, detail="File too large (max 10MB)")
-    RESUME_PATH.write_bytes(content)
-    logger.info(f"Resume updated. Size={len(content)} bytes")
-    return {"success": True, "size_bytes": len(content), "filename": "resume.pdf"}
+    await db.resume_files.update_one(
+        {"_id": RESUME_DOC_ID},
+        {"$set": {
+            "filename": file.filename or RESUME_FILENAME,
+            "content_type": "application/pdf",
+            "size_bytes": len(content),
+            "data": content,
+            "updated_at": datetime.now(timezone.utc).isoformat(),
+        }},
+        upsert=True,
+    )
+    logger.info(f"Resume updated in MongoDB. Size={len(content)} bytes")
+    return {"success": True, "size_bytes": len(content), "filename": RESUME_FILENAME}
 
 
 # Include the router in the main app
@@ -243,6 +257,34 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+
+@app.on_event("startup")
+async def seed_resume_if_missing():
+    """On first boot, seed the resume in MongoDB from the bundled PDF if collection is empty."""
+    try:
+        existing = await db.resume_files.find_one({"_id": RESUME_DOC_ID})
+        if existing:
+            logger.info("Resume already in MongoDB; skipping seed.")
+            return
+        if SEED_RESUME_PATH.exists():
+            content = SEED_RESUME_PATH.read_bytes()
+            await db.resume_files.update_one(
+                {"_id": RESUME_DOC_ID},
+                {"$set": {
+                    "filename": RESUME_FILENAME,
+                    "content_type": "application/pdf",
+                    "size_bytes": len(content),
+                    "data": content,
+                    "updated_at": datetime.now(timezone.utc).isoformat(),
+                }},
+                upsert=True,
+            )
+            logger.info(f"Seeded resume into MongoDB. Size={len(content)} bytes")
+        else:
+            logger.warning("No seed resume file found and no resume in MongoDB.")
+    except Exception as e:
+        logger.error(f"Resume seed failed: {e}")
 
 
 @app.on_event("shutdown")
