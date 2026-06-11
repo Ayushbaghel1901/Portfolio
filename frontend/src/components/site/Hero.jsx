@@ -1,4 +1,5 @@
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 import { ArrowDownRight, Download, Github, Linkedin, Mail, MapPin } from "lucide-react";
 import { PROFILE } from "@/lib/data";
 
@@ -11,8 +12,17 @@ const stat = {
 };
 
 export default function Hero() {
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end start"],
+  });
+  const photoY = useTransform(scrollYProgress, [0, 1], [0, 80]);
+  const textY = useTransform(scrollYProgress, [0, 1], [0, -60]);
+  const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
   return (
     <section
+      ref={ref}
       id="home"
       className="relative min-h-screen pt-28 pb-20 overflow-hidden"
       data-testid="hero-section"
@@ -23,9 +33,12 @@ export default function Hero() {
       <div className="absolute -top-32 -right-20 w-[600px] h-[600px] rounded-full bg-cyan-500/15 blur-[140px] pointer-events-none" />
       <div className="absolute bottom-0 -left-20 w-[420px] h-[420px] rounded-full bg-blue-500/10 blur-[120px] pointer-events-none" />
 
-      <div className="relative max-w-7xl mx-auto px-6 sm:px-8 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+      <motion.div
+        style={{ opacity }}
+        className="relative max-w-7xl mx-auto px-6 sm:px-8 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center"
+      >
         {/* Text */}
-        <div className="lg:col-span-7 order-2 lg:order-1">
+        <motion.div style={{ y: textY }} className="lg:col-span-7 order-2 lg:order-1">
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
@@ -149,10 +162,10 @@ export default function Hero() {
               </motion.div>
             ))}
           </div>
-        </div>
+        </motion.div>
 
         {/* Photo */}
-        <div className="lg:col-span-5 order-1 lg:order-2 flex justify-center lg:justify-end">
+        <motion.div style={{ y: photoY }} className="lg:col-span-5 order-1 lg:order-2 flex justify-center lg:justify-end">
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -194,8 +207,8 @@ export default function Hero() {
               </div>
             </div>
           </motion.div>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </section>
   );
 }

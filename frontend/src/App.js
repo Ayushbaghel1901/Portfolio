@@ -11,10 +11,13 @@ import Education from "@/components/site/Education";
 import Contact from "@/components/site/Contact";
 import Footer from "@/components/site/Footer";
 import Admin from "@/pages/Admin";
+import { AnimatedBackground, ScrollProgress } from "@/components/site/BackgroundFx";
 
 function Portfolio() {
   return (
-    <div className="relative min-h-screen bg-[#0a0a0a] text-white">
+    <div className="relative min-h-screen bg-[#0a0a0a] text-white overflow-x-hidden">
+      <ScrollProgress />
+      <AnimatedBackground />
       <div className="grain-overlay" />
       <Navbar />
       <main className="relative z-10">
