@@ -10,15 +10,15 @@ import { Code2, Sparkles, Database, Wrench, BrainCircuit } from "lucide-react";
 export const PROFILE = {
   name: "Ayush Baghel",
   firstName: "Ayush",
-  role: "AI/ML & Full-Stack Developer",
+  role: "Aspiring Data Analyst & ML Enthusiast",
   tagline:
-    "B.Tech Information Technology student crafting data-driven products, intelligent ML pipelines and AI-augmented full-stack apps.",
+    "B.Tech Information Technology student turning raw data into decisions — through analytics dashboards, SQL, and growing machine-learning chops.",
   location: "Gwalior, Madhya Pradesh, India",
   email: "ayushbaghel19@gmail.com",
   phone: "+91 97701 84477",
   phoneRaw: "+919770184477",
   github: "https://github.com/Ayushbaghel1901",
-  linkedin: "https://linkedin.com/in/nayushbaghel19",
+  linkedin: "https://linkedin.com/in/ayushbaghel19",
   photo:
     "https://customer-assets.emergentagent.com/job_e476834d-6d78-47d9-b0e1-86b131a69550/artifacts/wrcwv469_Gemini_Generated_Image_minkvpminkvpmink%20%281%29.png",
 };

@@ -34,7 +34,7 @@ const CONTACT_LINKS = [
   {
     id: "linkedin",
     label: "LinkedIn",
-    value: "nayushbaghel19",
+    value: "ayushbaghel19",
     href: PROFILE.linkedin,
     Icon: Linkedin,
   },

@@ -2,16 +2,16 @@ import { motion } from "framer-motion";
 import SectionLabel from "./SectionLabel";
 
 const PARAGRAPHS = [
-  "I'm Ayush — a B.Tech Information Technology student at MITS Gwalior, fascinated by the intersection of data, machine learning and clean software engineering.",
-  "I build things that are equal parts useful and rigorous: secure full-stack web apps, ML pipelines with measurable metrics, and dashboards that turn raw data into decisions.",
-  "I'm an AI-native developer — I treat models like Gemini, GPT and Claude (and IDEs like Cursor & Antigravity) as everyday tools to ship faster without compromising on craft.",
+  "I'm Ayush — a B.Tech Information Technology student at MITS Gwalior, with a strong focus on data analytics, business intelligence and the storytelling power of clean dashboards.",
+  "I love turning messy datasets into clear, decision-ready visuals: Power BI dashboards, EDA in Python, SQL deep-dives, and supervised ML models that go beyond just numbers.",
+  "I'm AI-native in how I work — Gemini, GPT, Claude, Cursor and Antigravity are my daily copilots for moving from data to insight, faster and with sharper craft.",
 ];
 
 const HIGHLIGHTS = [
-  { k: "Focus", v: "AI / ML, Data Science, Full-Stack" },
-  { k: "Currently", v: "Building ML pipelines & exploring agentic dev" },
+  { k: "Focus", v: "Data Analytics, BI & Machine Learning" },
+  { k: "Currently", v: "Building ML pipelines & analytics dashboards" },
   { k: "Languages", v: "English (Professional), Hindi (Native)" },
-  { k: "Open to", v: "Internships, Open-Source, Collaborations" },
+  { k: "Open to", v: "Data Analyst internships, BI & ML projects" },
 ];
 
 export default function About() {
@@ -22,7 +22,7 @@ export default function About() {
           <div className="lg:col-span-4">
             <SectionLabel index="01" label="About" />
             <h2 className="font-display mt-4 text-3xl sm:text-4xl lg:text-5xl font-black tracking-tighter text-white leading-tight">
-              Engineer at heart.
+              Data-driven by craft.
               <br />
               <span className="text-cyan-400">AI-augmented</span> by default.
             </h2>
