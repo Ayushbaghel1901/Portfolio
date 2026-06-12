@@ -61,7 +61,7 @@ export default function Hero() {
           >
             Ayush <br className="hidden sm:block" >
             <span className="bg-gradient-to-r from-white via-cyan-200 to-cyan-400 bg-clip-text text-transparent">
-              Baghel
+             Sharma
             </span>
           </motion.h1>
 
