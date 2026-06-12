@@ -59,7 +59,7 @@ export default function Hero() {
             className="font-display mt-6 text-4xl sm:text-5xl lg:text-7xl font-black tracking-tighter text-white leading-[0.95]"
             data-testid="hero-name"
           >
-            Ayush <br className="hidden sm:block" />
+            Ayush{" "}
             <span className="bg-gradient-to-r from-white via-cyan-200 to-cyan-400 bg-clip-text text-transparent">
             Baghel
             </span>
